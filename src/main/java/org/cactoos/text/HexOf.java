@@ -49,20 +49,17 @@ public final class HexOf extends TextEnvelope {
      * @param bytes The bytes
      */
     public HexOf(final Bytes bytes) {
-        super(new Scalar<String>() {
-            @Override
-            public String value() throws Exception {
-                final byte[] bts = bytes.asBytes();
-                final char[] hex = new char[bts.length * 2];
-                int chr = -1;
-                for (int idx = 0; idx < bts.length; ++idx) {
-                    // @checkstyle MagicNumber (3 line)
-                    final int value = 0xff & bts[idx];
-                    hex[++chr] = HexOf.HEX_CHARS[value >>> 4];
-                    hex[++chr] = HexOf.HEX_CHARS[value & 0x0f];
-                }
-                return new String(hex);
+        super((Scalar<String>) () -> {
+            final byte[] bts = bytes.asBytes();
+            final char[] hex = new char[bts.length * 2];
+            int chr = -1;
+            for (int idx = 0; idx < bts.length; ++idx) {
+                // @checkstyle MagicNumber (3 line)
+                final int value = 0xff & bts[idx];
+                hex[++chr] = HexOf.HEX_CHARS[value >>> 4];
+                hex[++chr] = HexOf.HEX_CHARS[value & 0x0f];
             }
+            return new String(hex);
         });
     }
 }

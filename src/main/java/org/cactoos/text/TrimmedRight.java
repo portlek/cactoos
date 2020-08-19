@@ -40,16 +40,13 @@ public final class TrimmedRight extends TextEnvelope {
      * @param text The text
      */
     public TrimmedRight(final Text text) {
-        super(new Scalar<String>() {
-            @Override
-            public String value() throws Exception {
-                final String string = text.asString();
-                int cursor = string.length() - 1;
-                while (cursor >= 0 && Character.isWhitespace(string.charAt(cursor))) {
-                    cursor = cursor - 1;
-                }
-                return string.substring(0, cursor + 1);
+        super((Scalar<String>) () -> {
+            final String string = text.asString();
+            int cursor = string.length() - 1;
+            while (cursor >= 0 && Character.isWhitespace(string.charAt(cursor))) {
+                cursor = cursor - 1;
             }
+            return string.substring(0, cursor + 1);
         });
     }
 }

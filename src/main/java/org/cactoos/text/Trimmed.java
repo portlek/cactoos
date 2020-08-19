@@ -40,11 +40,6 @@ public final class Trimmed extends TextEnvelope {
      * @param text The text
      */
     public Trimmed(final Text text) {
-        super(new Scalar<String>() {
-            @Override
-            public String value() throws Exception {
-                return text.asString().trim();
-            }
-        });
+        super((Scalar<String>) () -> text.asString().trim());
     }
 }

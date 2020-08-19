@@ -48,12 +48,9 @@ public final class Synced extends TextEnvelope {
      * @param lck The lock
      */
     public Synced(final Text text, final Object lck) {
-        super(new Scalar<String>() {
-            @Override
-            public String value() throws Exception {
-                synchronized (lck) {
-                    return text.asString();
-                }
+        super((Scalar<String>) () -> {
+            synchronized (lck) {
+                return text.asString();
             }
         });
     }

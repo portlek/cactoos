@@ -23,6 +23,7 @@
  */
 package org.cactoos.text;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import org.cactoos.Scalar;
 import org.cactoos.Text;
@@ -76,7 +77,7 @@ public abstract class TextEnvelope implements Text {
     }
 
     @Override
-    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("EQ_UNUSUAL")
+    @SuppressFBWarnings("EQ_UNUSUAL")
     public final boolean equals(final Object obj) {
         return new Unchecked<>(
             new Or(

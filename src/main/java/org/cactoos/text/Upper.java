@@ -58,11 +58,6 @@ public final class Upper extends TextEnvelope {
      * @param locale Locale
      */
     public Upper(final Text text, final Locale locale) {
-        super(new Scalar<String>() {
-            @Override
-            public String value() throws Exception {
-                return text.asString().toUpperCase(locale);
-            }
-        });
+        super((Scalar<String>) () -> text.asString().toUpperCase(locale));
     }
 }
